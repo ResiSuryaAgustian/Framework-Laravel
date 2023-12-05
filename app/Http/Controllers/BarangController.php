@@ -61,46 +61,39 @@ public function coba()
         return view('content');
     }
 
-    public function prosesdua(Request $requestdua)
+public function editForm($kode_barang)
 {
-    // Form input
+    // Fetch the data of the specified item using $kode_barang
+    $item = Products::where('kode_barang', $kode_barang)->firstOrFail(); // Replace YourModel with your actual model
 
-    $kode_barang = $requestdua->input('kode_barang');
-    $nama_barang = $requestdua->input('nama_barang');
-    $jenis_varian = $requestdua->input('jenis_varian');
-    $qty = $requestdua->input('qty');
-    $harga_jual = $requestdua->input('harga_jual');
-
-    dd($kode_barang);
-
-    // Hitung total harga
-    $total_harga = $qty * $harga_jual;
-
-    // Hitung potongan harga
-    $potongan_harga = 0;
-    if ($total_harga >= 500000) {
-        $potongan_harga = 0.5 * $total_harga;   //total pembelanjaan >= 500,000 diskon 50%
-    } elseif ($total_harga >= 200000) {
-        $potongan_harga = 0.2 * $total_harga;   //total pembelanjaan >= 200,000 diskon 20%
-    } elseif ($total_harga >= 100000) {
-        $potongan_harga = 0.1 * $total_harga;       //total pembelanjaan >= 100,000 diskon 10%
-    }
-
-    // Hitung harga setelah diskon
-    $harga_setelah_diskon = $total_harga - $potongan_harga;
-
-    $hasil = [
-        'kode_barang' => $kode_barang,
-        'nama_barang' => $nama_barang,
-        'jenis_varian' => $jenis_varian,
-        'qty' => $qty,
-        'harga_jual' => $harga_jual,
-        'total_harga' => $total_harga,
-        'potongan_harga' => $potongan_harga,
-        'harga_setelah_diskon' => $harga_setelah_diskon,
+    // Pass the data to the view
+    $data = [
+        'kode_barang' => $item->kode_barang,
+        'nama_barang' => $item->nama_barang,
+        'jenis_varian' => $item->jenis_varian,
+        'qty' => $item->qty,
+        'harga_jual' => $item->harga_jual,
     ];
 
-    return view('content', ['hasil' => $hasil]);
+    return view('edit_form', ['data' => $data]);
+}
+
+public function editProses(Request $request, $kode_barang)
+{
+    // Retrieve the existing data of the item using $kode_barang
+    $item = Products::where('kode_barang', $kode_barang)->firstOrFail(); // Replace YourModel with your actual model
+
+    // Update the data with the new values from the form
+    $item->nama_barang = $request->input('nama_barang');
+    $item->jenis_varian = $request->input('jenis_varian');
+    $item->qty = $request->input('qty');
+    $item->harga_jual = $request->input('harga_jual');
+
+    // Save the updated data
+    $item->save();
+
+    // Redirect back to the original page or show a success message
+    return redirect('/barang')->with('success', 'Item updated successfully');
 }
 
 }

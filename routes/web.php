@@ -19,8 +19,10 @@ Route::get('/', function () {
 
 Route::get('/barang', 'App\Http\Controllers\BarangController@index');
 Route::post('/barang/proses', 'App\Http\Controllers\BarangController@proses');
-Route::get('/utama', 'App\Http\Controllers\BarangController@coba');
+// Route::get('/utama', 'App\Http\Controllers\BarangController@coba');
 Route::get('/konten', 'App\Http\Controllers\BarangController@form');
 // Route::get('/utama',[BarangController::class,'coba']); 
 Route::post('/konten/proses', 'App\Http\Controllers\BarangController@prosesdua');
 
+Route::get('/barang/edit/{kode_barang}', 'App\Http\Controllers\BarangController@editForm');
+Route::post('/barang/edit/{kode_barang}', 'App\Http\Controllers\BarangController@editProses');

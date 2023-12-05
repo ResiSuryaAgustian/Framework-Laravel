@@ -2,9 +2,10 @@
 
 @section('content')
 
-<div class="main-panel">        
+
+{{-- <div class="main-panel">        
     <div class="content-wrapper">
-      <div class="row">
+      <div class="row"> --}}
         <div class="col-md-6 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
@@ -45,43 +46,47 @@
                 <label>Harga Jual:</label>
                 <input class="form-control" type="text" name="harga_jual" required>
                 </div>
-                
-            
-            
-                {{-- <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputConfirmPassword1">Confirm Password</label>
-                  <input type="password" class="form-control" id="exampleInputConfirmPassword1" placeholder="Password">
-                </div>
-                <div class="form-check form-check-flat form-check-primary">
-                  <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input">
-                    Remember me
-                  </label>
-                </div> --}}
+
                 <button type="submit" class="btn btn-primary me-2">Proses</button>
                 <button class="btn btn-light">Cancel</button>
             
               </form>
-              @isset($result)
-                <h2>Hasil:</h2>
-                <p>Kode Barang: {{ $result['kode_barang'] }}</p>
-                <p>Nama Barang: {{ $result['nama_barang'] }}</p>
-                <p>Jenis Varian: {{ $result['jenis_varian'] }}</p>
-                <p>Qty: {{ $result['qty'] }}</p>
-                <p>Harga Jual: {{ $result['harga_jual'] }}</p>
-            
-                <p>Total Harga Jual: {{ $result['total_harga'] }}</p>
-                <p>Potongan Harga: {{ $result['potongan_harga'] }}</p>
-                <p>Harga yang Harus Dibayar: {{ $result['harga_setelah_diskon'] }}</p>
-            @endisset
+
+<br><br>
+@if(isset($result))
+    <table style="border-collapse: collapse; width: 100%;">
+        <thead>
+            <tr style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                <th style="border: 1px solid #dddddd; padding: 8px;">Kode Barang</th>
+                <th style="border: 1px solid #dddddd; padding: 8px;">Nama Barang</th>
+                <th style="border: 1px solid #dddddd; padding: 8px;">Jenis Varian</th>
+                <th style="border: 1px solid #dddddd; padding: 8px;">Qty</th>
+                <th style="border: 1px solid #dddddd; padding: 8px;">Harga Jual</th>
+                <th style="border: 1px solid #dddddd; padding: 8px;">Total Harga</th>
+                <th style="border: 1px solid #dddddd; padding: 8px;">Potongan Harga</th>
+                <th style="border: 1px solid #dddddd; padding: 8px;">Harga Setelah Diskon</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                <td style="border: 1px solid #dddddd; padding: 8px;">{{ $result['kode_barang'] }}</td>
+                <td style="border: 1px solid #dddddd; padding: 8px;">{{ $result['nama_barang'] }}</td>
+                <td style="border: 1px solid #dddddd; padding: 8px;">{{ $result['jenis_varian'] }}</td>
+                <td style="border: 1px solid #dddddd; padding: 8px;">{{ $result['qty'] }}</td>
+                <td style="border: 1px solid #dddddd; padding: 8px;">{{ $result['harga_jual'] }}</td>
+                <td style="border: 1px solid #dddddd; padding: 8px;">{{ $result['total_harga'] }}</td>
+                <td style="border: 1px solid #dddddd; padding: 8px;">{{ $result['potongan_harga'] }}</td>
+                <td style="border: 1px solid #dddddd; padding: 8px;">{{ $result['harga_setelah_diskon'] }}</td>
+                <td><a href="/konten/edit">Edit</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <td style="border: 1px solid #dddddd; padding: 8px;">
+      <a href="/barang/edit/{{ $result['kode_barang'] }}" class="btn btn-warning">Edit</a>
+  </td>
+@endif
+
+
 
             </div>
           </div>

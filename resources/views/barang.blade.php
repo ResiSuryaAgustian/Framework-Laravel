@@ -46,3 +46,34 @@
     <p>Potongan Harga: {{ $result['potongan_harga'] }}</p>
     <p>Harga yang Harus Dibayar: {{ $result['harga_setelah_diskon'] }}</p>
 @endisset
+
+
+@isset($result)
+<table>
+    <thead>
+        <tr>
+            <th>Kode Barang</th>
+            <th>Nama Barang</th>
+            <th>Jenis Varian</th>
+            <th>Qty</th>
+            <th>Harga Jual</th>
+            <th>Total Harga</th>
+            <th>Potongan Harga</th>
+            <th>Harga Setelah Diskon</th>
+        </tr>
+    </thead>
+    <tr>
+        <td>{{ $result['kode_barang'] }}</td>
+    </tr>
+</table>
+    <h2>Hasil:</h2>
+    <p>Kode Barang: {{ $result['kode_barang'] }}</p>
+    <p>Nama Barang: {{ $result['nama_barang'] }}</p>
+    <p>Jenis Varian: {{ $result['jenis_varian'] }}</p>
+    <p>Qty: {{ $result['qty'] }}</p>
+    <p>Harga Jual: {{ $result['harga_jual'] }}</p>
+
+    <p>Total Harga Jual: {{ $result['total_harga'] }}</p>
+    <p>Potongan Harga: {{ $result['potongan_harga'] }}</p>
+    <p>Harga yang Harus Dibayar: {{ $result['harga_setelah_diskon'] }}</p>
+@endisset
